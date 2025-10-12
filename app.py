@@ -42,7 +42,7 @@ def get_user_inputs(config):
         label = feature.replace('_', ' ').title()
         if props['type'] == 'categorical':
             inputs[feature] = st.selectbox(label, options=props['values'], index=0)
-        else: # numerical
+        else:
             inputs[feature] = st.slider(
                 label,
                 min_value=props['min'],
@@ -51,19 +51,21 @@ def get_user_inputs(config):
             )
     return inputs
 
+
 def calculate_score(probabilities, classes):
-    """Calculate the weighted performance score."""
-    band_weights = {"Very Low": 10, "Low": 30, "Medium": 50, "High": 70, "Very High": 90}
-    score = sum(probabilities[list(classes).index(b)] * band_weights[b] for b in classes)
+    """Calculate weighted performance score for 3-band model."""
+    band_weights = {"Low": 30, "Medium": 60, "High": 90}
+    score = sum(probabilities[list(classes).index(b)] * band_weights.get(b, 0) for b in classes)
     return score
+
 
 # ===============================================================
 # Main Application UI
 # ===============================================================
-st.title("🎯 Hawkstone Outlet Performance Predictor")
+st.title("🎯 Hawkstone Outlet Performance Predictor (3-Band Model)")
 st.markdown("""
-This tool uses a machine learning model to predict the performance score of an outlet based on key characteristics.
-Adjust the levers in the sidebar to see how they impact the potential score.
+This tool predicts an outlet's performance tier — **Low**, **Medium**, or **High** — based on recent activity and location-type levers.
+Adjust the sliders and dropdowns on the left to explore how each feature influences the prediction.
 """)
 
 if model and feature_config:
@@ -77,20 +79,23 @@ if model and feature_config:
     # --- Main Panel for Outputs ---
     if predict_button:
         with st.spinner('Calculating score...'):
-            # Create a DataFrame from inputs
+            # Prepare DataFrame for prediction
             input_df = pd.DataFrame([user_inputs])
-
-            # Ensure correct data types
             for feature, props in feature_config.items():
                 if props['type'] == 'categorical':
                     input_df[feature] = input_df[feature].astype('category')
 
-            # Get predictions
+            # --- Model Predictions ---
             probabilities = model.predict_proba(input_df)[0]
-            predicted_band = model.predict(input_df)[0][0]
+
+            preds = model.predict(input_df)
+            if isinstance(preds, np.ndarray) and preds.ndim > 1:
+                preds = preds.ravel()
+            predicted_band = preds[0]
+
             predicted_score = calculate_score(probabilities, model.classes_)
 
-            # Display results
+            # --- Display Results ---
             st.subheader("Prediction Results")
             col1, col2 = st.columns(2)
 
@@ -98,17 +103,23 @@ if model and feature_config:
                 st.metric(
                     label="Predicted Performance Score",
                     value=f"{predicted_score:.1f}",
-                    help="Score is on a 0-100 scale, calculated from band probabilities."
+                    help="Score on a 0–100 scale derived from predicted band probabilities."
                 )
-                
-                # Dynamic styling for the predicted band
-                color_map = {"Very Low": "red", "Low": "orange", "Medium": "blue", "High": "green", "Very High": "violet"}
-                band_color = color_map.get(predicted_band, "grey")
-                st.markdown(f"**Predicted Band:** <span style='color: {band_color}; font-weight: bold; font-size: 1.2em; border: 1px solid {band_color}; border-radius: 5px; padding: 5px;'>{predicted_band}</span>", unsafe_allow_html=True)
 
+                color_map = {
+                    "Low": "#E74C3C",        # red
+                    "Medium": "#3498DB",     # blue
+                    "High": "#27AE60"        # green
+                }
+                band_color = color_map.get(predicted_band, "grey")
+                st.markdown(
+                    f"**Predicted Band:** <span style='color: {band_color}; "
+                    f"font-weight: bold; font-size: 1.2em; border: 1px solid {band_color}; "
+                    f"border-radius: 5px; padding: 5px;'>{predicted_band}</span>",
+                    unsafe_allow_html=True
+                )
 
             with col2:
-                # Create a DataFrame for the probability chart
                 prob_df = pd.DataFrame({
                     'Band': model.classes_,
                     'Probability': probabilities
@@ -118,7 +129,7 @@ if model and feature_config:
                 st.bar_chart(prob_df)
 
     else:
-        st.info("Adjust the levers in the sidebar and click 'Predict Performance' to see the results.")
+        st.info("Use the sidebar to adjust inputs and click **Predict Performance**.")
 
 else:
-    st.warning("Application is not configured. Please run the training script.")
+    st.warning("Model or configuration not found. Please train the model first.")
