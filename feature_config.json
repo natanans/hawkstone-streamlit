@@ -54,7 +54,7 @@
         "type": "numerical",
         "min": 3,
         "max": 4,
-        "mean": 4
+        "mean": 4.00
     },
     "reviews_total": {
         "type": "numerical",
