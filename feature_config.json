@@ -1,0 +1,133 @@
+{
+    "cga_quality_classification": {
+        "type": "categorical",
+        "values": [
+            "Bronze",
+            "Gold",
+            "Platinum",
+            "Silver"
+        ]
+    },
+    "footfall_count_avg_unique_visitors": {
+        "type": "numerical",
+        "min": 111,
+        "max": 1037,
+        "mean": 550
+    },
+    "location_description": {
+        "type": "categorical",
+        "values": [
+            "01. Key City Centre",
+            "02. Key City (Outside City Centre)",
+            "03. Urban",
+            "04. Suburban",
+            "05. Rural"
+        ]
+    },
+    "government_region": {
+        "type": "categorical",
+        "values": [
+            "East Midlands",
+            "East of England",
+            "London",
+            "North East England",
+            "North West England",
+            "Scotland",
+            "South East England",
+            "South West England",
+            "Wales",
+            "West Midlands",
+            "Yorkshire and the Humber"
+        ]
+    },
+    "quality_key": {
+        "type": "categorical",
+        "values": [
+            "C+",
+            "M ",
+            "P ",
+            "S ",
+            "V "
+        ]
+    },
+    "reviews_average": {
+        "type": "numerical",
+        "min": 3,
+        "max": 4,
+        "mean": 4
+    },
+    "reviews_total": {
+        "type": "numerical",
+        "min": 4,
+        "max": 4378,
+        "mean": 515
+    },
+    "area_wealth": {
+        "type": "categorical",
+        "values": [
+            "C+",
+            "M ",
+            "P ",
+            "S ",
+            "V "
+        ]
+    },
+    "outlet_segment_type_name": {
+        "type": "categorical",
+        "values": [
+            "Bar",
+            "Bar & Kitchen",
+            "Events Venue",
+            "Holiday Park",
+            "Hotel",
+            "Leisure Venue",
+            "Leisure/Health Club",
+            "Local",
+            "Restaurant",
+            "Sports/Social Club"
+        ]
+    },
+    "outlet_type_name": {
+        "type": "categorical",
+        "values": [
+            "Adaptive Community Pub",
+            "B&B / Guest House",
+            "Bar",
+            "Bar & Kitchen",
+            "Bowls/Bowling Club",
+            "Chinese Restaurant",
+            "Cinema/theatre",
+            "Community Pub",
+            "Craft Bar / Brewery Tap / Hybrid Stores",
+            "Cricket Club",
+            "Events Venue",
+            "Food Pub",
+            "Football Club",
+            "French Restaurant",
+            "Gastronomic dining",
+            "Golf Club",
+            "High Street Pub",
+            "Holiday Park",
+            "Hotel",
+            "Indian Restaurant",
+            "Italian Restaurant",
+            "Leisure Venue",
+            "Leisure/Health club",
+            "Live Music Venue",
+            "Local Pub w/Rooms",
+            "Political Affiliation Club",
+            "Quick Dining",
+            "Restaurant",
+            "Rugby Club",
+            "Social/Members club",
+            "Sports club",
+            "Sports/Themed Pub/Bar",
+            "Student/Music",
+            "Tennis Club",
+            "Thai Restaurant",
+            "Turkish Restaurant",
+            "Wedding Venue",
+            "Wine/Cocktail Bar"
+        ]
+    }
+}
