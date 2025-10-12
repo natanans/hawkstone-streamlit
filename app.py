@@ -91,9 +91,20 @@ if model and feature_config:
             preds = model.predict(input_df)
             if isinstance(preds, np.ndarray) and preds.ndim > 1:
                 preds = preds.ravel()
-            predicted_band = preds[0]
+            predicted_score = calculate_score(probabilities, model.classes_)
 
             predicted_score = calculate_score(probabilities, model.classes_)
+
+            # Derive band directly from observed score distribution
+            # Based on: Low ≈ 51.1, Medium ≈ 55.4, High ≈ 58.0
+            if predicted_score < 53.0:
+                predicted_band = "Low"
+            elif predicted_score < 56.7:
+                predicted_band = "Medium"
+            else:
+                predicted_band = "High"
+
+
 
             # --- Display Results ---
             st.subheader("Prediction Results")
