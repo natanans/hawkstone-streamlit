@@ -4,6 +4,6 @@
   "ignore-parser" : false,
   "description" : null,
   "schedule-spec" : null,
-  "input-tables" : [ ],
-  "output-tables" : [ ]
+  "input-tables" : [ "PROD.SHOPIFY_SUBENTITY.SHOPIFY_ORDERS_SUBENTITY", "PROD.MASTERING.CUSTOMER_MASTERING" ],
+  "output-tables" : [ "PROD.GIT_TEST.ORDERS_ENTITY" ]
 }
