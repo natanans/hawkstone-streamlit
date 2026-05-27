@@ -1,0 +1,9 @@
+{
+  "status" : "active",
+  "is-full" : false,
+  "ignore-parser" : false,
+  "description" : null,
+  "schedule-spec" : null,
+  "input-tables" : [ ],
+  "output-tables" : [ ]
+}
