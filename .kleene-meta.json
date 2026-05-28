@@ -2,8 +2,15 @@
   "groups" : [ {
     "id" : "a2596751-aaaf-4074-af69-5b7e3a6ba262",
     "name" : "ENTITY"
+  }, {
+    "id" : "537c42e4-6fd8-447f-b3c2-ca58700f7243",
+    "name" : "DW"
   } ],
   "transforms" : {
-    "a2596751-aaaf-4074-af69-5b7e3a6ba262" : [ ]
+    "a2596751-aaaf-4074-af69-5b7e3a6ba262" : [ ],
+    "537c42e4-6fd8-447f-b3c2-ca58700f7243" : [ {
+      "id" : "bc5d3641-2d20-4257-b1bd-0516154aba61",
+      "name" : "PROD.DW.CUSTOMERS_DOMAIN"
+    } ]
   }
 }
