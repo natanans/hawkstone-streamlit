@@ -1,0 +1,9 @@
+{
+  "status" : "active",
+  "is-full" : false,
+  "ignore-parser" : false,
+  "description" : null,
+  "schedule-spec" : null,
+  "input-tables" : [ "PROD.DW.ORDERS_DOMAIN", "PROD.DW.KLAVIYO_PERFORMANCE_DOMAIN" ],
+  "output-tables" : [ "PROD.DW.CUSTOMERS_DOMAIN" ]
+}
